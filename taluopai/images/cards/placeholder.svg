@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="340" viewBox="0 0 200 340">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#252540"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="340" rx="12" fill="url(#bg)" stroke="#c9a84c" stroke-width="2"/>
+  <rect x="10" y="10" width="180" height="320" rx="8" fill="none" stroke="#3d3d5c" stroke-width="1"/>
+  <circle cx="100" cy="150" r="30" fill="none" stroke="#6b6b8a" stroke-width="1"/>
+  <text x="100" y="155" text-anchor="middle" font-size="20" fill="#a0a0c0">✦</text>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#6b6b8a">塔罗</text>
+  <text x="100" y="210" text-anchor="middle" font-size="12" fill="#6b6b8a">卡牌</text>
+</svg>

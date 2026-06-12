@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumitrace Studio · 宣传片</title>
+<style>
+  /* 竖屏 9:16 宣传片 — 纯 CSS 动画时间轴，总长 ~22s，录屏即成片
+     用法：浏览器打开本页 → F11 全屏 → 录屏 (画面居中 9:16，两侧黑边录完在剪映裁掉) */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { height:100%; background:#000; overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Noto Sans SC",sans-serif;
+    -webkit-font-smoothing:antialiased; }
+
+  /* 9:16 画布，按视口高度适配 */
+  .stage { position:relative; height:100vh; aspect-ratio:9/16; margin:0 auto; overflow:hidden; background:#fff; }
+  .stage * { letter-spacing:-0.02em; }
+
+  /* ---------- 每个场景：绝对铺满，按时间轴显隐 ---------- */
+  .scene { position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; opacity:0; padding:8%; }
+
+  /* 时间轴 (总 22s)：开场0-5 / 印迹5-10 / 塔罗10-15 / 墨迹15-19 / 收尾19-22(停住) */
+  @keyframes hold { 0%{opacity:0; visibility:hidden;} 1%{opacity:1; visibility:visible;} 99%{opacity:1;} 100%{opacity:0; visibility:hidden;} }
+  .s1 { animation:hold 5s   linear 0s    1 both; }
+  .s2 { animation:hold 5s   linear 5s    1 both; }
+  .s3 { animation:hold 5s   linear 10s   1 both; }
+  .s4 { animation:hold 4s   linear 15s   1 both; }
+  @keyframes holdEnd { 0%{opacity:0; visibility:hidden;} 5%{opacity:1; visibility:visible;} 100%{opacity:1; visibility:visible;} }
+  .s5 { animation:holdEnd 3.5s linear 19s 1 both; }
+
+  /* ---------- 元素入场 (apple ease) ---------- */
+  @keyframes up { from{opacity:0; transform:translateY(34px);} to{opacity:1; transform:translateY(0);} }
+  .up { opacity:0; animation:up .9s cubic-bezier(.28,.11,.32,1) both; animation-delay:inherit; }
+
+  /* 场景内的延迟在各场景基准上叠加 */
+  .s1 .d1{animation-delay:.4s} .s1 .d2{animation-delay:.9s} .s1 .d3{animation-delay:1.5s}
+  .s2 .d1{animation-delay:5.4s} .s2 .d2{animation-delay:5.9s} .s2 .d3{animation-delay:6.5s}
+  .s3 .d1{animation-delay:10.4s} .s3 .d2{animation-delay:10.9s} .s3 .d3{animation-delay:11.5s}
+  .s4 .d1{animation-delay:15.4s} .s4 .d2{animation-delay:15.9s} .s4 .d3{animation-delay:16.4s}
+  .s5 .d1{animation-delay:19.5s} .s5 .d2{animation-delay:20.1s} .s5 .d3{animation-delay:20.7s}
+
+  /* ---------- 文字风格 ---------- */
+  .eyebrow { font-size:clamp(14px,2.2vh,22px); font-weight:600; }
+  .big { font-size:clamp(34px,6.4vh,72px); font-weight:700; line-height:1.08; }
+  .sub { font-size:clamp(15px,2.4vh,24px); line-height:1.5; font-weight:450; }
+
+  /* ---------- 场景 1 · 开场 (白) ---------- */
+  .s1 { background:#fff; color:#1d1d1f; }
+  .s1 .eyebrow { color:#86868b; }
+  .s1 .sub { color:#424245; margin-top:3vh; white-space:pre-line; }
+  .logo { width:13vh; height:13vh; border-radius:3vh; margin-bottom:4vh;
+    background:linear-gradient(135deg,#FFD9A8,#F2965E 50%,#C2632D);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2vh 6vh rgba(194,99,45,.3); }
+  .logo span { font-size:6vh; }
+
+  /* ---------- 场景 2 · 印迹 (暖米) ---------- */
+  .s2 { background:#F7F3EB; color:#1C1814; }
+  .s2 .eyebrow { color:#C2632D; }
+  .s2 .sub { color:#6F6356; margin-top:3vh; }
+  .photo-card { margin-top:5vh; width:62%; background:#fff; border-radius:2.4vh; padding:1.2vh;
+    box-shadow:0 3vh 8vh rgba(90,42,18,.22); }
+  .photo { height:24vh; border-radius:1.8vh; position:relative; overflow:hidden;
+    background:linear-gradient(#5E8DB8,#3A5F84 55%,#1C3148); }
+  .photo::after { content:''; position:absolute; left:0; right:0; bottom:0; height:7vh; background:#0C1410;
+    clip-path:polygon(0 55%,10% 25%,22% 50%,36% 12%,50% 42%,64% 18%,78% 48%,90% 22%,100% 40%,100% 100%,0 100%); }
+  .photo-bar { padding:1.8vh 0 1vh; font-size:1.9vh; color:#1C1814; letter-spacing:.12em; }
+
+  /* ---------- 场景 3 · 塔罗 (暗夜) ---------- */
+  .s3 { background:#0B0712 radial-gradient(1px 1px at 18% 24%,rgba(255,255,255,.8),transparent),
+        radial-gradient(1.5px 1.5px at 70% 14%,rgba(255,255,255,.6),transparent),
+        radial-gradient(1px 1px at 40% 60%,rgba(255,255,255,.5),transparent),
+        radial-gradient(1px 1px at 86% 44%,rgba(255,255,255,.65),transparent),
+        radial-gradient(1.5px 1.5px at 26% 84%,rgba(255,255,255,.5),transparent); color:#F5F5F7; }
+  .s3 .eyebrow { color:#D8B45A; }
+  .s3 .sub { color:#A1A1A6; margin-top:3vh; }
+  .cards { margin-top:5vh; display:flex; gap:2vh; }
+  .tcard { width:11vh; height:17vh; border-radius:1.6vh; border:1px solid rgba(216,180,90,.55);
+    background:linear-gradient(160deg,#1A1126,#0E0817); display:flex; align-items:center; justify-content:center;
+    font-size:4vh; box-shadow:0 2vh 5vh rgba(0,0,0,.6); }
+  .tcard:nth-child(2){ transform:translateY(-2vh); border-color:rgba(167,139,250,.6); }
+
+  /* ---------- 场景 4 · 墨迹 (浅灰) ---------- */
+  .s4 { background:#F5F5F7; color:#1C1C1E; }
+  .s4 .eyebrow { color:#1d1d1f; }
+  .s4 .sub { color:#6e6e73; margin-top:3vh; }
+  .quote-card { margin-top:5vh; width:66%; background:#FFF8F0; border-radius:2.4vh; padding:5vh 4vh;
+    box-shadow:0 3vh 8vh rgba(0,0,0,.12); }
+  .quote-card p { font-family:Georgia,"Songti SC",serif; font-size:clamp(16px,2.6vh,26px);
+    line-height:1.6; color:#3A2A1A; text-align:left; }
+
+  /* ---------- 场景 5 · 收尾 (黑) ---------- */
+  .s5 { background:#000; color:#F5F5F7; }
+  .s5 .sub { color:#A1A1A6; margin-top:3vh; white-space:pre-line; }
+  .url { margin-top:4.5vh; font-size:clamp(15px,2.4vh,24px); color:#2997FF; font-weight:500; }
+
+  /* 减少动效偏好：全部直接显示最终帧没意义(是宣传片)，仍保留但提示 */
+  .replay { position:fixed; right:16px; bottom:16px; z-index:9; padding:8px 16px; font-size:13px;
+    border:1px solid #444; border-radius:99px; background:rgba(20,20,20,.8); color:#ddd; cursor:pointer; }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+
+    <section class="scene s1">
+      <div class="logo up d1"><span>✦</span></div>
+      <div class="big up d2">Lumitrace Studio</div>
+      <div class="sub up d3">灵迹工作室
+光影有迹，灵犀一点</div>
+    </section>
+
+    <section class="scene s2">
+      <div class="eyebrow up d1">印迹</div>
+      <div class="big up d2">给照片，盖上时光的章。</div>
+      <div class="photo-card up d3">
+        <div class="photo"></div>
+        <div class="photo-bar">2026.06.10</div>
+      </div>
+    </section>
+
+    <section class="scene s3">
+      <div class="eyebrow up d1">塔罗牌</div>
+      <div class="big up d2">每天一张牌，照见内心。</div>
+      <div class="cards up d3">
+        <div class="tcard">🌙</div><div class="tcard">⭐</div><div class="tcard">☀️</div>
+      </div>
+    </section>
+
+    <section class="scene s4">
+      <div class="eyebrow up d1">墨迹</div>
+      <div class="big up d2">一句话，一张卡片。</div>
+      <div class="quote-card up d3"><p>万物皆有裂痕，<br>那是光照进来的地方。</p></div>
+    </section>
+
+    <section class="scene s5">
+      <div class="big up d1">小而美，不打扰。</div>
+      <div class="sub up d2">免费 · 网页打开即用 · 不用注册
+数据只在你自己的设备上</div>
+      <div class="url up d3">Lumitrace Studio</div>
+    </section>
+
+  </div>
+  <button class="replay" onclick="location.reload()">↻ 重播</button>
+</body>
+</html>
