@@ -690,37 +690,6 @@
   .tools-menu.hidden{display:none;}
   .tools-menu button{display:flex;align-items:center;gap:6px;padding:8px 12px;border:none;border-radius:10px;background:none;font-size:13px;color:var(--ink);cursor:pointer;white-space:nowrap;}
   .tools-menu button:active{background:rgba(0,0,0,.06);}
-  /* -- tarot banner (v3.20.0) -- */
-  .tarot-banner{
-    display:flex;align-items:center;gap:12px;
-    margin:0 0 16px;padding:12px 16px;border-radius:16px;
-    background:linear-gradient(135deg,#12062a 0%,#1a0a36 40%,#0d1630 100%);
-    border:1px solid rgba(160,120,220,.25);
-    position:relative;overflow:hidden;
-    text-decoration:none;cursor:pointer;
-    box-shadow:0 0 20px rgba(100,40,180,.18),0 0 40px rgba(60,20,140,.10),inset 0 1px 0 rgba(255,255,255,.06);
-    transition:box-shadow .3s ease,transform .2s ease;
-  }
-  .tarot-banner:hover{
-    box-shadow:0 0 28px rgba(120,50,200,.28),0 0 56px rgba(80,30,160,.16),0 0 80px rgba(60,20,140,.08),inset 0 1px 0 rgba(255,255,255,.08);
-    transform:translateY(-1px);
-  }
-  .tarot-banner:active{transform:scale(.985);}
-  .tarot-banner-icon{font-size:32px;flex:none;filter:drop-shadow(0 0 8px rgba(180,130,255,.5));animation:tarotPulse 2.5s ease-in-out infinite;}
-  @keyframes tarotPulse{
-    0%,100%{filter:drop-shadow(0 0 6px rgba(180,130,255,.4));}
-    50%{filter:drop-shadow(0 0 14px rgba(200,160,255,.7));}
-  }
-  .tarot-banner-text{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;}
-  .tarot-banner-title{font-size:14px;font-weight:650;color:#d4c0f0;letter-spacing:.03em;}
-  .tarot-banner-sub{font-size:11.5px;color:rgba(200,180,220,.65);letter-spacing:.02em;}
-  .tarot-banner-glow{
-    position:absolute;top:-50%;right:-20%;
-    width:120px;height:120px;border-radius:50%;
-    background:radial-gradient(circle,rgba(140,80,220,.18) 0%,transparent 70%);
-    pointer-events:none;
-  }
-  /* dark theme: banner already dark, no change needed */
   /* -- crop (v3.17.0) -- */
   .crop-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:55;display:none;align-items:center;justify-content:center;flex-direction:column;}
   .crop-overlay.show{display:flex;}
@@ -1524,18 +1493,11 @@
       <div class="privacy-note">默认关着。打开后，去「水印 → 手动输入」点「🌐 联网 AI 灵感」才会用。只把时间 / 季节 / 色调 / 设备这些文字发给你填的 AI，绝不发照片。钥匙只存在你这台手机上。有些 AI 服务商不允许网页直接连（CORS），连不上时会自动给你端上的灵感。</div>
     </div>
 
-    <a class="tarot-banner" href="https://tarotzyq.netlify.app/" target="_blank" rel="noopener">
-      <span class="tarot-banner-icon">🔮</span>
-      <span class="tarot-banner-text">
-        <span class="tarot-banner-title">Tarot · 塔罗占卜</span>
-        <span class="tarot-banner-sub">揭示你的命运轨迹 →</span>
-      </span>
-      <span class="tarot-banner-glow"></span>
-    </a>
 
     <div class="set-sec">
       <h4>关于</h4>
       <div class="about-ver">印迹 · 照片水印 &nbsp;<b id="aboutVer">v3.0.0-beta.6</b></div>
+      <div class="about-ver" style="margin-top:6px;font-size:12px;color:var(--ink-dim,#8A8A8E)">by <a href="https://lysandrazyq.github.io/lumitrace/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Lumitrace Studio</a></div>
       <div class="set-actions">
         <button class="btn btn-ghost" id="replayOnboardBtn">重看新手引导</button>
       </div>

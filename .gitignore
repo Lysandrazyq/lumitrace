@@ -1,0 +1,7 @@
+﻿*.mp4
+*.mp3
+*.pyc
+__pycache__/
+make_video.py
+extract_*.png
+final_*.png
