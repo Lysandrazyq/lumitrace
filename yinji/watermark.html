@@ -1249,7 +1249,10 @@
   /* privacy note */
   .set-sec .privacy-note{padding:0 16px 14px;}
   /* AI fields */
-  .set-sec .ai-fields .field{padding:0 16px;}
+  .set-sec .ai-fields{padding:6px 0 14px;}
+  .set-sec .ai-fields .field{padding:0 16px;margin-top:12px;}
+  .set-sec .ai-fields .field:first-child{margin-top:4px;}
+  .set-sec .ai-fields label.lbl{margin-left:0;}
   /* 固定文字输入 */
   .set-sec #fixedTextWrap{padding:0 16px 12px;margin-top:0;}
   /* 关于 section */
@@ -1831,7 +1834,7 @@
   "use strict";
 
   // ---------- version (single source of truth; bump on every release) ----------
-  var APP_VERSION = "v4.0.0";
+  var APP_VERSION = "v4.0.1";
 
   // ---------- 访问统计(百度统计 · 异步加载 / 不阻塞渲染 / 不发照片) ----------
   // 站点 ID 是在百度统计「新增网站」后拿到的公开标识(写在每个访客的页面里、非密钥)。
