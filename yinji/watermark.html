@@ -999,6 +999,300 @@
   /* 4) SF 风格内联图标的统一度量 */
   .sfi{width:20px;height:20px;display:block;margin:auto;stroke:currentColor;fill:none;
     stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* ============================================================
+     v4.0.0 — Apple HIG 全面对齐层 (2026-06-13)
+     参照 developer.apple.com/design/human-interface-guidelines
+     纯 CSS 升级，不改任何 HTML / JS
+     覆盖范围：导航栏 · 分段控件 · 弹层 · 设置面板 · 按钮 · 输入框
+     ============================================================ */
+
+  /* === 0. 系统色补充 === */
+  :root{
+    --sys-green:#34C759;
+    --sys-separator:rgba(60,40,10,0.12);
+    --sys-fill:rgba(120,120,128,0.12);
+  }
+
+  /* === 1. 导航栏 (HIG: Navigation Bars)
+     44pt 高 · 半透明材质 · 随滚动保持可见 === */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    /* 向两侧延伸突破 .wrap 内边距，实现全宽效果 */
+    margin:0 -18px;
+    padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;
+    min-height:calc(env(safe-area-inset-top,0px) + 44px);
+    background:rgba(239,234,224,0.85);
+    -webkit-backdrop-filter:saturate(180%) blur(20px) brightness(1.02);
+    backdrop-filter:saturate(180%) blur(20px) brightness(1.02);
+    border-bottom:0.5px solid rgba(60,40,10,0.14);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    animation:none;
+  }
+  body[data-theme="dark"] header{
+    background:rgba(22,19,15,0.88);
+    border-bottom-color:rgba(255,255,255,0.10);
+  }
+  /* 标题区：行内排列，精简 */
+  .brand{
+    flex-direction:row;
+    align-items:baseline;
+    gap:6px;
+  }
+  .brand .name{font-size:17px;font-weight:600;letter-spacing:-0.022em;}
+  /* 把版本号缩成 caption 尺寸，放在名称右侧 */
+  .brand .tag{
+    font-family:var(--font);
+    font-size:11px;
+    letter-spacing:0;
+    text-transform:none;
+    color:var(--ink-soft);
+    opacity:0.7;
+    margin-top:0;
+  }
+  /* 导航栏里的工具按钮缩到 34×34（次要动作用稍小图标，HIG 允许） */
+  header .icon-btn{width:36px;height:36px;border-radius:11px;}
+  header .icon-btn svg{width:18px;height:18px;}
+
+  /* === 2. 分段控件 (HIG: Segmented Controls)
+     iOS 13+ 精准款：圆角轨道 + 白色浮片 + 阴影 === */
+  /* 主分段控件（主题 / 文字模式 / 画质等功能选择器）*/
+  .seg{
+    background:rgba(120,120,128,0.12);
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+    border-radius:9px;
+    border:none;
+    padding:2px;
+    gap:0;
+    box-shadow:none;
+  }
+  .seg button{
+    border-radius:7px;
+    font-size:13px;
+    font-weight:500;
+    padding:7px 10px;
+    color:rgba(60,40,10,0.55);
+    min-height:32px;
+    flex:1;
+  }
+  body[data-theme="dark"] .seg{background:rgba(255,255,255,0.10);}
+  body[data-theme="dark"] .seg button{color:rgba(241,235,225,0.55);}
+  .seg button.on{
+    background:#fff;
+    color:var(--ink);
+    font-weight:600;
+    box-shadow:0 1px 3px rgba(0,0,0,0.14),0 1px 2px rgba(0,0,0,0.08);
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+  body[data-theme="dark"] .seg button.on{background:rgba(255,255,255,0.22);}
+  /* 水印 / 滤镜 chips 用的 tone-seg 保留原液态玻璃风格 */
+  .tone-seg{
+    background:rgba(239,234,224,0.55)!important;
+    -webkit-backdrop-filter:blur(14px)!important;
+    backdrop-filter:blur(14px)!important;
+    border:1px solid rgba(255,255,255,0.5)!important;
+    box-shadow:inset 0 1px 1px rgba(255,255,255,0.4)!important;
+    border-radius:14px!important;
+    padding:4px!important;
+    gap:4px!important;
+  }
+  .tone-seg button{
+    border-radius:11px;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink-soft);
+    padding:9px 13px;
+    min-height:auto;
+  }
+  .tone-seg button.on{
+    background:rgba(255,255,255,0.85);
+    color:var(--ink);
+    box-shadow:0 2px 10px rgba(28,24,20,0.08),inset 0 1px 1px rgba(255,255,255,0.9);
+  }
+  /* 编辑器标签栏按钮 */
+  .edit-tabs button{font-size:14px;font-weight:600;}
+  .edit-tabs button.on{color:var(--accent);}
+
+  /* === 3. 按钮 (HIG: Buttons)
+     Filled · Tinted · 圆角 = 高度的 37% 约等于 14px === */
+  .btn{
+    border-radius:14px;
+    padding:15px 0;
+    font-size:17px;
+    font-weight:600;
+    letter-spacing:-0.022em;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#fff;
+    box-shadow:0 4px 16px rgba(194,99,45,0.30),inset 0 1px 0 rgba(255,255,255,0.22);
+  }
+  /* Tinted 按钮：accent 浅底 + accent 文字 */
+  .btn-ghost{
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:none;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+    box-shadow:none;
+  }
+  body[data-theme="dark"] .btn-ghost{
+    background:rgba(224,138,76,0.15);
+    border:none;
+  }
+  /* btn-warn 沿用系统红 */
+  .btn-ghost.btn-warn{color:#FF3B30;background:rgba(255,59,48,0.10);}
+  body[data-theme="dark"] .btn-ghost.btn-warn{color:#FF6961;background:rgba(255,59,48,0.15);}
+
+  /* === 4. 底部弹层 (HIG: Sheets)
+     顶圆角 16px · 抓手 · 内容区留安全区高度 === */
+  .sheet{
+    border-radius:16px 16px 0 0;
+    padding:0 20px calc(env(safe-area-inset-bottom,0px) + 28px);
+  }
+  /* 抓手（HIG: Grabber）*/
+  .sheet::before{
+    content:'';
+    display:block;
+    width:36px;height:5px;
+    border-radius:3px;
+    background:rgba(60,40,10,0.18);
+    margin:10px auto 18px;
+  }
+  body[data-theme="dark"] .sheet::before{background:rgba(255,255,255,0.24);}
+  .sheet h3{font-size:17px;font-weight:600;text-align:center;margin:0 0 4px;}
+  .sheet .sub{font-size:13px;color:var(--ink-soft);text-align:center;margin:0 0 16px;line-height:1.5;}
+
+  /* === 5. 设置面板 (HIG: Settings)
+     iOS Settings.app 风格：圆角玻璃卡片 + 节标题 + 分隔线 === */
+  .settings-sheet{
+    padding-top:0;
+    -webkit-overflow-scrolling:touch;
+  }
+  /* 设置页面标题 */
+  .settings-sheet > .sheet h3{
+    padding:6px 0 0;
+  }
+  /* 每个 section → 玻璃卡片 */
+  .set-sec{
+    background:rgba(255,255,255,0.62);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    backdrop-filter:blur(20px) saturate(160%);
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.55);
+    overflow:hidden;
+    margin-top:22px;
+    padding:0;
+  }
+  .set-sec:first-of-type{margin-top:8px;}
+  body[data-theme="dark"] .set-sec{
+    background:rgba(40,35,28,0.72);
+    border-color:rgba(255,255,255,0.10);
+  }
+  /* section 标题行 */
+  .set-sec > h4{
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    letter-spacing:0.01em;
+    text-transform:none;
+    margin:0;
+    padding:12px 16px 10px;
+    border-bottom:0.5px solid var(--sys-separator);
+  }
+  /* section 内标签（小灰字，如「默认打开水印」）*/
+  .set-sec .set-lbl{
+    font-size:12.5px;
+    font-weight:400;
+    color:var(--ink-soft);
+    margin:0;
+    padding:10px 16px 4px;
+  }
+  /* section 内的分段控件 */
+  .set-sec .seg{
+    margin:6px 16px 12px;
+  }
+  /* iOS 列表单元格（toggle 行）*/
+  .set-sec .setting-row{
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    padding:6px 16px;
+    border-top:0.5px solid var(--sys-separator);
+    margin-top:0;
+  }
+  .set-sec .setting-row + .setting-row{
+    border-top:0.5px solid var(--sys-separator);
+  }
+  .set-sec .setting-lbl{font-size:16px;font-weight:400;color:var(--ink);}
+  /* 色板行 */
+  .set-sec .accent-swatches{
+    padding:4px 16px 14px;
+  }
+  /* 自动信息 checkbox 格 */
+  .set-sec .set-grid{
+    padding:8px 12px 12px;
+    gap:8px;
+  }
+  /* 操作按钮区 */
+  .set-sec .set-actions{
+    padding:10px 16px 14px;
+    gap:10px;
+  }
+  .set-sec .set-actions .btn{padding:13px 0;font-size:15px;}
+  /* privacy note */
+  .set-sec .privacy-note{padding:0 16px 14px;}
+  /* AI fields */
+  .set-sec .ai-fields .field{padding:0 16px;}
+  /* 固定文字输入 */
+  .set-sec #fixedTextWrap{padding:0 16px 12px;margin-top:0;}
+  /* 关于 section */
+  .set-sec .about-ver{padding:10px 16px;text-align:center;font-size:15px;margin:0;}
+  .set-sec .about-ver:first-of-type{padding-top:14px;}
+  /* 下拉框 */
+  .set-sec .set-select{margin:4px 16px 10px;width:calc(100% - 32px);}
+
+  /* === 6. iOS-精准开关 (HIG: Toggles) === */
+  /* 开 → 系统绿 #34C759（iOS HIG 默认 toggle 颜色） */
+  .switch input:checked + .slider{background:var(--sys-green);}
+  .switch .slider{background:rgba(120,120,128,0.32);}
+  body[data-theme="dark"] .switch .slider{background:rgba(255,255,255,0.18);}
+
+  /* === 7. 输入框 (HIG: Text Fields) === */
+  input[type=text], textarea{
+    border-radius:10px;
+    padding:12px 14px;
+    background:rgba(255,255,255,0.60);
+    border-color:rgba(255,255,255,0.65);
+  }
+  input[type=text]:focus, textarea:focus{
+    background:rgba(255,255,255,0.92);
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(194,99,45,0.12),inset 0 1px 1px rgba(255,255,255,0.6);
+  }
+
+  /* === 8. 圆角精修 (HIG: Rounded Rectangles) === */
+  .panel{border-radius:20px;}
+  .canvas-stage{border-radius:22px;padding:14px;}
+  .drop{border-radius:22px;}
+  .icon-btn{border-radius:12px;}
+  .nodata{border-radius:12px;}
+  .chip{border-radius:10px;}
+  .cap-chip{border-radius:10px;}
+  .flt-act{border-radius:10px;}
+  .filter-rand{border-radius:9px;}
+
+  /* === 9. 拍照按钮区域细节 === */
+  .drop h2{font-size:17px;font-weight:600;}
+  .drop p{font-size:14px;}
+  .drop .ring{width:60px;height:60px;border-radius:18px;}
+  .drop .ring svg{width:28px;height:28px;}
 </style>
 </head>
 <body>
@@ -1537,7 +1831,7 @@
   "use strict";
 
   // ---------- version (single source of truth; bump on every release) ----------
-  var APP_VERSION = "v3.21.0";
+  var APP_VERSION = "v4.0.0";
 
   // ---------- 访问统计(百度统计 · 异步加载 / 不阻塞渲染 / 不发照片) ----------
   // 站点 ID 是在百度统计「新增网站」后拿到的公开标识(写在每个访客的页面里、非密钥)。
