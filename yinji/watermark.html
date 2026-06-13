@@ -1268,6 +1268,8 @@
   .switch input:checked + .slider{background:var(--sys-green);}
   .switch .slider{background:rgba(120,120,128,0.32);}
   body[data-theme="dark"] .switch .slider{background:rgba(255,255,255,0.18);}
+  /* 主题色圆点：min-height:44px 会把 30px 圆变成椭圆；重置为正圆 */
+  .accent-sw{min-height:0;height:30px;}
 
   /* === 7. 输入框 (HIG: Text Fields) === */
   input[type=text], textarea{
@@ -1836,7 +1838,7 @@
   "use strict";
 
   // ---------- version (single source of truth; bump on every release) ----------
-  var APP_VERSION = "v4.0.2";
+  var APP_VERSION = "v4.0.3";
 
   // ---------- 访问统计(百度统计 · 异步加载 / 不阻塞渲染 / 不发照片) ----------
   // 站点 ID 是在百度统计「新增网站」后拿到的公开标识(写在每个访客的页面里、非密钥)。
