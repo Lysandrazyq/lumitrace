@@ -2,202 +2,523 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>一隅 · 每天一问，写下三行的自己</title>
   <meta name="description" content="每天一个问题，写下三行的自己。纯本地，不上传。">
+  <link rel="icon" href="favicon.svg">
   <style>
     :root {
       --bg: #F7F5F0;
       --card: #FFFFFF;
       --accent: #4A6B5D;
+      --accent-soft: rgba(74,107,93,0.09);
       --ink: #2B2A26;
       --ink-soft: #8A857B;
       --ink-dim: #C4BFB7;
       --sep: rgba(60,56,48,0.08);
+      --shadow-sm: 0 4px 20px rgba(43,42,38,0.06);
+      --shadow-md: 0 8px 40px rgba(43,42,38,0.09);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { height: 100%; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
       background: var(--bg);
       color: var(--ink);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    .serif { font-family: Georgia, "Noto Serif SC", "Songti SC", serif; }
 
-    header {
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 40px;
-      max-width: 680px;
-      width: 100%;
-      margin: 0 auto;
+      padding: 0 40px;
+      height: 60px;
+      background: rgba(247,245,240,0.88);
+      -webkit-backdrop-filter: saturate(160%) blur(20px);
+      backdrop-filter: saturate(160%) blur(20px);
+      border-bottom: 0.5px solid var(--sep);
     }
-    .logo { font-size: 16px; font-weight: 700; letter-spacing: 0.06em; }
-
-    .open-link {
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-icon { width: 28px; height: 28px; flex-shrink: 0; }
+    .nav-open {
       font-size: 13px;
       font-weight: 500;
       color: var(--accent);
       text-decoration: none;
-      opacity: 0.8;
-      transition: opacity 0.2s;
+      padding: 8px 20px;
+      border: 1.5px solid currentColor;
+      border-radius: 99px;
+      transition: background 0.18s, color 0.18s;
     }
-    .open-link:hover { opacity: 1; }
+    .nav-open:hover { background: var(--accent); color: #fff; }
 
+    /* ── Hero ── */
     .hero {
-      flex: 1;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 20px 40px 48px;
-      max-width: 560px;
-      margin: 0 auto;
-      width: 100%;
+      padding: 100px 40px 72px;
     }
-
-    .accent-dot {
-      width: 8px; height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      margin-bottom: 32px;
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      opacity: 0.75;
     }
-
     .hero-title {
       font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
-      font-size: clamp(64px, 16vw, 96px);
+      font-size: clamp(88px, 24vw, 168px);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       color: var(--ink);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
-
     .hero-sub {
       font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
-      font-size: clamp(17px, 4vw, 21px);
+      font-size: clamp(18px, 4vw, 23px);
       color: var(--ink-soft);
       line-height: 1.65;
-      margin-bottom: 40px;
-      max-width: 340px;
+      margin-bottom: 48px;
+      max-width: 360px;
     }
-
-    .cta {
+    .hero-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
-      padding: 15px 36px;
+      padding: 16px 44px;
       border-radius: 99px;
-      letter-spacing: 0.02em;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 16px rgba(74,107,93,0.25);
+      letter-spacing: 0.01em;
+      box-shadow: 0 8px 28px rgba(74,107,93,0.28);
+      transition: opacity 0.2s, transform 0.16s;
     }
-    .cta:hover { opacity: 0.88; transform: translateY(-1px); }
-    .cta:active { transform: scale(0.97); }
-    .cta-arrow { font-size: 18px; opacity: 0.8; }
-
-    .features {
+    .hero-cta:hover { opacity: 0.86; transform: translateY(-2px); }
+    .hero-cta:active { transform: scale(0.97); opacity: 1; }
+    .hero-scroll-hint {
+      margin-top: 64px;
       display: flex;
-      justify-content: center;
-      gap: 0;
-      padding: 0 40px 64px;
-      max-width: 560px;
-      margin: 0 auto;
-      width: 100%;
-      border-top: 1px solid var(--sep);
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink-dim);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+    .hero-scroll-hint span:first-child {
+      width: 1px;
+      height: 44px;
+      background: var(--ink-dim);
+      display: block;
     }
 
-    .feat {
-      flex: 1;
-      text-align: center;
-      padding: 32px 16px 0;
-    }
-    .feat + .feat { border-left: 1px solid var(--sep); }
-
-    .feat-glyph {
-      font-size: 20px;
+    /* ── Section utilities ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 10px;
       opacity: 0.7;
+      text-align: center;
+      margin-bottom: 14px;
     }
-    .feat-name {
+    .section-title {
+      font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+      font-size: clamp(26px, 5.5vw, 40px);
+      font-weight: 700;
+      text-align: center;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      font-size: 15px;
+      color: var(--ink-soft);
+      text-align: center;
+      line-height: 1.75;
+      max-width: 380px;
+      margin: 0 auto 56px;
+    }
+
+    /* ── Mockup ── */
+    .mockup-wrap {
+      padding: 80px 24px 100px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .mockup-phone {
+      background: var(--card);
+      border-radius: 28px;
+      padding: 28px 28px 24px;
+      box-shadow: var(--shadow-md), 0 1px 0 rgba(255,255,255,0.9) inset;
+      border: 0.5px solid rgba(255,255,255,0.6);
+    }
+    .mockup-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .mockup-appname { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .mockup-count { font-size: 12px; color: var(--ink-soft); }
+    .mockup-card-inner {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 22px 22px 18px;
+    }
+    .mockup-date-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .mockup-q {
+      font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+    .mockup-ta {
+      width: 100%;
+      background: var(--card);
+      border: none;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink);
+      resize: none;
+      outline: none;
+      min-height: 108px;
+      display: block;
+    }
+    .mockup-ta::placeholder { color: var(--ink-dim); }
+    .mockup-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      min-height: 36px;
+    }
+    .mockup-saved {
+      font-size: 11px;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .mockup-saved.show { opacity: 1; }
+    .mockup-export-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 99px;
+      padding: 8px 18px;
       font-size: 13px;
+      font-weight: 500;
+      cursor: default;
+      font-family: inherit;
+    }
+
+    /* ── Features ── */
+    .features-wrap {
+      padding: 80px 40px 100px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .feat {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .feat-glyph {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .feat-name { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .feat-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.75; }
+
+    /* ── Export preview ── */
+    .export-wrap {
+      padding: 80px 40px 100px;
+      background: var(--card);
+      text-align: center;
+    }
+    .card-preview {
+      width: 210px;
+      height: 264px;
+      background: var(--bg);
+      border-radius: 18px;
+      margin: 48px auto;
+      padding: 22px 20px 18px;
+      text-align: left;
+      box-shadow: 0 20px 70px rgba(43,42,38,0.14);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .cp-bar { width: 32px; height: 4px; background: var(--accent); border-radius: 2px; margin-bottom: 16px; }
+    .cp-date { font-size: 9px; color: var(--ink-soft); margin-bottom: 12px; }
+    .cp-q {
+      font-family: Georgia, serif;
+      font-size: 10.5px;
       font-weight: 600;
       color: var(--ink);
-      margin-bottom: 5px;
-      letter-spacing: 0.02em;
+      line-height: 1.55;
+      margin-bottom: 14px;
     }
-    .feat-desc {
-      font-size: 12px;
-      color: var(--ink-soft);
-      line-height: 1.65;
+    .cp-a { font-family: Georgia, serif; font-size: 9px; color: #55514A; line-height: 1.9; flex: 1; }
+    .cp-brand { font-size: 8px; color: var(--ink-soft); margin-top: 12px; }
+    .cp-dot { position: absolute; bottom: 18px; right: 18px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
+
+    /* ── Privacy ── */
+    .privacy-wrap {
+      padding: 80px 40px 100px;
+      max-width: 440px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .privacy-icon {
+      width: 56px; height: 56px;
+      border-radius: 18px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
     }
 
+    /* ── Bottom CTA ── */
+    .bottom-cta {
+      padding: 80px 40px 100px;
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── Footer ── */
     footer {
-      padding: 20px 40px;
+      padding: 28px 40px calc(28px + env(safe-area-inset-bottom));
+      border-top: 0.5px solid var(--sep);
       text-align: center;
       font-size: 12px;
       color: var(--ink-dim);
-      border-top: 1px solid var(--sep);
     }
     footer a { color: inherit; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    footer a:hover { color: var(--accent); }
 
-    @media (max-width: 480px) {
-      header, .hero, .features { padding-left: 24px; padding-right: 24px; }
-      .features { flex-direction: column; gap: 0; }
-      .feat + .feat { border-left: none; border-top: 1px solid var(--sep); }
-      .feat { padding: 24px 0 0; }
+    /* ── Fade-up ── */
+    .fu { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fu.in { opacity: 1; transform: translateY(0); }
+    .fu.d1 { transition-delay: 0.1s; }
+    .fu.d2 { transition-delay: 0.2s; }
+    .fu.d3 { transition-delay: 0.3s; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 88px 24px 60px; }
+      .features-wrap { padding: 60px 20px 80px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .mockup-wrap { padding: 60px 20px 80px; }
+      .export-wrap { padding: 60px 20px 80px; }
+      .privacy-wrap, .bottom-cta { padding: 60px 24px 80px; }
+      footer { padding: 24px 20px calc(24px + env(safe-area-inset-bottom)); }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <span class="logo">一隅</span>
-    <a href="./" class="open-link">打开应用 →</a>
-  </header>
-
-  <main class="hero">
-    <div class="accent-dot"></div>
-    <h1 class="hero-title">一隅</h1>
-    <p class="hero-sub">每天一问，写下三行的自己</p>
-    <a href="./" class="cta">
-      开始记录
-      <span class="cta-arrow">→</span>
+  <nav>
+    <a href="./" class="nav-logo" aria-label="一隅">
+      <svg class="nav-icon" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="96" height="96" rx="22" fill="#F7F5F0"/>
+        <rect x="20" y="20" width="56" height="56" rx="6" stroke="#4A6B5D" stroke-width="6"/>
+        <circle cx="48" cy="48" r="9" fill="#4A6B5D"/>
+      </svg>
+      一隅
     </a>
-  </main>
+    <a href="./" class="nav-open">打开应用</a>
+  </nav>
 
-  <div class="features">
-    <div class="feat">
-      <div class="feat-glyph">✦</div>
-      <div class="feat-name">每天一问</div>
-      <div class="feat-desc">每天一个不同的问题，全球同步轮转，从不重复</div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-tag">Daily Journal</div>
+    <h1 class="hero-title">一隅</h1>
+    <p class="hero-sub">每天一问<br>写下三行的自己</p>
+    <a href="./" class="hero-cta">开始记录 →</a>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span></span>
+      <span>向下探索</span>
     </div>
-    <div class="feat">
-      <div class="feat-glyph">◎</div>
-      <div class="feat-name">三行就够</div>
-      <div class="feat-desc">写下三行记录，少即是多，轻盈不费力</div>
-    </div>
-    <div class="feat">
-      <div class="feat-glyph">○</div>
-      <div class="feat-name">纯本地</div>
-      <div class="feat-desc">所有文字只存在你自己的设备上，不上传</div>
+  </section>
+
+  <!-- App mockup -->
+  <div class="mockup-wrap">
+    <div class="mockup-phone fu">
+      <div class="mockup-header">
+        <span class="mockup-appname">一隅</span>
+        <span class="mockup-count">已记录 12 天</span>
+      </div>
+      <div class="mockup-card-inner">
+        <div class="mockup-date-tag">今日一问 · 06 / 13</div>
+        <p class="mockup-q">如果用一种天气形容今天的心情，会是什么？</p>
+        <textarea id="demoTa" class="mockup-ta" placeholder="写下三行，就够了。" rows="4" readonly></textarea>
+        <div class="mockup-actions">
+          <span class="mockup-saved" id="savedTip">已存好 ✓</span>
+          <button class="mockup-export-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            导出卡片
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Features -->
+  <section class="features-wrap">
+    <div class="section-label fu">为什么是一隅</div>
+    <h2 class="section-title fu d1">少而精，轻而远</h2>
+    <p class="section-sub fu d2">不用每天想写什么。一个问题，三行回答，坚持一年，你会认识一个更清晰的自己。</p>
+    <div class="features-grid">
+      <div class="feat fu">
+        <div class="feat-glyph">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6B5D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="feat-name">每天一问</div>
+        <div class="feat-desc">全球同步一个问题，按日序号轮转，永远不会重复。不用想写什么——只需要回答。</div>
+      </div>
+      <div class="feat fu d1">
+        <div class="feat-glyph">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6B5D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="15" y1="14" x2="3" y2="14"/></svg>
+        </div>
+        <div class="feat-name">三行就够</div>
+        <div class="feat-desc">少即是多。不要求写一篇日记，三行记录，轻盈，不费力，但已经足够了。</div>
+      </div>
+      <div class="feat fu d2">
+        <div class="feat-glyph">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6B5D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div class="feat-name">纯本地</div>
+        <div class="feat-desc">所有文字只存在你自己的设备上，不联网，不上传。没有账号，没有广告，随时可用。</div>
+      </div>
+      <div class="feat fu d3">
+        <div class="feat-glyph">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6B5D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="feat-name">导出卡片</div>
+        <div class="feat-desc">将你的回答生成为美观的图片卡片，可保存到相册，也可以分享给朋友看。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Export card preview -->
+  <section class="export-wrap">
+    <div class="section-label fu">导出卡片</div>
+    <h2 class="section-title fu d1">留住每一天的回答</h2>
+    <div class="card-preview fu d2">
+      <div class="cp-bar"></div>
+      <div class="cp-date">2026 · 06 · 13</div>
+      <div class="cp-q">如果用一种天气形容今天的心情，会是什么？</div>
+      <div class="cp-a">今天是有点阴的晴天。<br>云很多，但阳光还是透进来了，<br>有点潮，有点暖，不坏。</div>
+      <div class="cp-brand">一隅 · 每日一问</div>
+      <div class="cp-dot"></div>
+    </div>
+    <p class="fu d3" style="font-size:14px;color:var(--ink-soft);max-width:300px;margin:0 auto;line-height:1.75;">生成 1080×1350 高清图片，<br>适合保存到相册，也适合发朋友圈。</p>
+  </section>
+
+  <!-- Privacy -->
+  <section class="privacy-wrap">
+    <div class="privacy-icon fu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A6B5D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <h2 class="section-title fu d1" style="margin-bottom:14px;">你的文字，只属于你</h2>
+    <p class="fu d2" style="font-size:15px;color:var(--ink-soft);line-height:1.85;">一隅不连接任何服务器。你写下的每一行文字，都只存储在你自己的设备里。没有账号，不需要注册，没有追踪，没有广告。</p>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <h2 class="section-title fu" style="margin-bottom:14px;">今天，从一个问题开始</h2>
+    <p class="section-sub fu d1" style="margin-bottom:40px;">每天只需要五分钟，<br>却可以留下一年的自己。</p>
+    <a href="./" class="hero-cta fu d2">打开一隅 →</a>
+  </section>
+
   <footer>
     <a href="https://lysandrazyq.github.io/lumitrace/" target="_blank" rel="noopener">Lumitrace Studio</a>
+    &nbsp;·&nbsp; 一隅 · 每天一问，写下三行的自己
   </footer>
+
+  <script>
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fu').forEach(function(el) { obs.observe(el); });
+
+    var ta = document.getElementById('demoTa');
+    var tip = document.getElementById('savedTip');
+    var text = '今天是有点阴的晴天。\n云很多，但阳光还是透进来了，\n有点潮，有点暖，不坏。';
+    var i = 0, started = false;
+    function type() {
+      if (i <= text.length) {
+        ta.value = text.slice(0, i++);
+        setTimeout(type, 55 + Math.random() * 35);
+      } else {
+        tip.classList.add('show');
+      }
+    }
+    var mo = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        setTimeout(type, 900);
+        mo.disconnect();
+      }
+    }, { threshold: 0.4 });
+    mo.observe(document.querySelector('.mockup-phone'));
+  </script>
 
 </body>
 </html>
