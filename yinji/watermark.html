@@ -1838,7 +1838,7 @@
   "use strict";
 
   // ---------- version (single source of truth; bump on every release) ----------
-  var APP_VERSION = "v4.0.3";
+  var APP_VERSION = "v4.1.0";
 
   // ---------- 访问统计(百度统计 · 异步加载 / 不阻塞渲染 / 不发照片) ----------
   // 站点 ID 是在百度统计「新增网站」后拿到的公开标识(写在每个访客的页面里、非密钥)。
@@ -4051,9 +4051,21 @@
     {id:"polaroidVibe",name:"拍立得调", cat:"mood"},
     {id:"ochre",       name:"赭石", cat:"mood"},
     {id:"twilightHour",name:"黄昏时分", cat:"mood"},
-    {id:"porcelain",   name:"青瓷", cat:"mood"}
+    {id:"porcelain",   name:"青瓷", cat:"mood"},
+    {id:"peachSoda",   name:"蜜桃汽水", cat:"fresh"},
+    {id:"oolongTea",   name:"乌龙", cat:"warm"},
+    {id:"roseQuartz",  name:"粉晶", cat:"fresh"},
+    {id:"steelBlue",   name:"钢蓝", cat:"cool"},
+    {id:"mapleSyrup",  name:"枫糖", cat:"warm"},
+    {id:"inkWash",     name:"水墨", cat:"bw"}
   ];
   var TONE_PARAMS = {
+    peachSoda:    { sat:1.12, con:0.97, bri:1.06, temp:14,  tint:-3, lift:12 },
+    oolongTea:    { sat:0.92, con:1.04, bri:1.01, temp:18,  tint:6,  lift:10 },
+    roseQuartz:   { sat:1.04, con:0.95, bri:1.07, temp:10,  tint:-5, lift:16 },
+    steelBlue:    { sat:0.96, con:1.09, bri:0.99, temp:-22, tint:-4, lift:6  },
+    mapleSyrup:   { sat:1.14, con:1.06, bri:1.00, temp:28,  tint:7,  lift:4  },
+    inkWash:      { sat:0,    con:1.12, bri:1.01, temp:0,   tint:2,  lift:8  },
     film:       { sat:0.82, con:0.92, bri:1.03, temp:12,  tint:-4, lift:16 },
     kodak:      { sat:0.98, con:0.96, bri:1.03, temp:16,  tint:3,  lift:12 },
     fade:       { sat:0.70, con:0.86, bri:1.05, temp:6,   tint:-2, lift:30 },
