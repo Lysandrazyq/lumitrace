@@ -1,0 +1,18 @@
+{
+  "name": "塔罗牌",
+  "short_name": "塔罗牌",
+  "description": "在线塔罗占卜 — 每日抽牌、牌阵占卜、卡牌图书馆。",
+  "start_url": "/lumitrace/taluopai/",
+  "scope": "/lumitrace/taluopai/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#c9a84c",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

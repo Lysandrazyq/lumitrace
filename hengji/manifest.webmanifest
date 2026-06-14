@@ -1,0 +1,13 @@
+{
+  "name": "恒迹 · 习惯打卡",
+  "short_name": "恒迹",
+  "description": "每天给习惯打卡，看连续坚持的天数。纯本地，不上传。",
+  "start_url": "/lumitrace/hengji/",
+  "scope": "/lumitrace/hengji/",
+  "display": "standalone",
+  "background_color": "#F6F8F8",
+  "theme_color": "#1AA39A",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

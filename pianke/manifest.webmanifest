@@ -1,0 +1,18 @@
+{
+  "name": "片刻 · 呼吸",
+  "short_name": "片刻",
+  "description": "三分钟的宁静，跟随圆环呼吸，可选白噪音。",
+  "start_url": "/lumitrace/pianke/",
+  "scope": "/lumitrace/pianke/",
+  "display": "standalone",
+  "background_color": "#F5F7FA",
+  "theme_color": "#007AFF",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
