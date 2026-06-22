@@ -1,0 +1,14 @@
+{
+  "name": "账迹 · 记账",
+  "short_name": "账迹",
+  "description": "记一笔，看见钱去了哪里。本地记账，不上传。",
+  "start_url": "/lumitrace/zhangji/",
+  "scope": "/lumitrace/zhangji/",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#2EA86E",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "apple-touch-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
