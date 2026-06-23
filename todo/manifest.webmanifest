@@ -1,0 +1,14 @@
+{
+  "name": "事迹 · 待办清单",
+  "short_name": "事迹",
+  "description": "把要做的事，一件件清掉。本地待办，不上传。",
+  "start_url": "/lumitrace/todo/",
+  "scope": "/lumitrace/todo/",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#5E5CE6",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "apple-touch-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
