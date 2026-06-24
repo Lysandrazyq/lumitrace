@@ -1,0 +1,14 @@
+{
+  "name": "专迹 · 专注番茄钟",
+  "short_name": "专迹",
+  "description": "一颗番茄的时间，只做一件事。本地专注计时，不上传。",
+  "start_url": "/lumitrace/zhuanji/",
+  "scope": "/lumitrace/zhuanji/",
+  "display": "standalone",
+  "background_color": "#1A1413",
+  "theme_color": "#F2614E",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "apple-touch-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
