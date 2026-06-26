@@ -1,7 +1,7 @@
 {
   "name": "账迹 · 记账",
   "short_name": "账迹",
-  "description": "记一笔，看见钱去了哪里。本地记账，不上传。",
+  "description": "记一笔，看见钱去了哪里。",
   "start_url": "/lumitrace/zhangji/",
   "scope": "/lumitrace/zhangji/",
   "display": "standalone",

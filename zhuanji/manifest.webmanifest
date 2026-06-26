@@ -1,7 +1,7 @@
 {
   "name": "专迹 · 专注番茄钟",
   "short_name": "专迹",
-  "description": "一颗番茄的时间，只做一件事。本地专注计时，不上传。",
+  "description": "一颗番茄的时间，只做一件事。",
   "start_url": "/lumitrace/zhuanji/",
   "scope": "/lumitrace/zhuanji/",
   "display": "standalone",

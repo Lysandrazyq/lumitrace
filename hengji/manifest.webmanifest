@@ -1,7 +1,7 @@
 {
   "name": "恒迹 · 习惯打卡",
   "short_name": "恒迹",
-  "description": "每天给习惯打卡，看连续坚持的天数。纯本地，不上传。",
+  "description": "每天给习惯打卡，看连续坚持的天数。",
   "start_url": "/lumitrace/hengji/",
   "scope": "/lumitrace/hengji/",
   "display": "standalone",

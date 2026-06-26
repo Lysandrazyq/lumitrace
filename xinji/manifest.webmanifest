@@ -1,7 +1,7 @@
 {
   "name": "心迹 · 年度心情色彩",
   "short_name": "心迹",
-  "description": "用颜色记录每天的心情，看见一整年的自己。纯本地，不上传。",
+  "description": "用颜色记录每天的心情，看见一整年的自己。",
   "start_url": "/lumitrace/xinji/",
   "scope": "/lumitrace/xinji/",
   "display": "standalone",
